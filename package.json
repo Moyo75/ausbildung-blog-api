@@ -9,6 +9,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.1.1",
     "express": "~4.16.1",
     "pg": "^8.8.0"
   },
