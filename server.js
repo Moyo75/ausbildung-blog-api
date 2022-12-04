@@ -1,5 +1,4 @@
 import express from "express";
-//import { getAllArticles } from "./queries.js";
 import env from "dotenv";
 
 import cors from "cors";
@@ -103,5 +102,8 @@ app.delete("/articles/:id", async (request, response) => {
 });
 
 app.listen(process.env.PORT, () =>
-  console.log(new Date().toLocaleTimeString() + ": Server is running...")
+  console.log(
+    new Date().toLocaleTimeString() +
+      `: Server is running on port ${process.env.PORT}...`
+  )
 );
