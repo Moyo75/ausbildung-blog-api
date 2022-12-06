@@ -76,7 +76,7 @@ app.put("/articles/:id", async (request, response) => {
       })
       .eq("id", request.params.id);
     const { data, err } = await supabase.from("blog").select();
-    return response.send(data);
+    return response.status(200).send(data);
   } catch (error) {
     response.send({ error });
   }
