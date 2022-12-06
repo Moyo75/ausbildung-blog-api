@@ -67,10 +67,6 @@ app.post("/articles", async (request, response) => {
 app.put("/articles/:id", async (request, response) => {
   console.log(request.params);
   try {
-    const { data, err } = await supabase
-      .from("blog")
-      .select()
-      .eq("id", parseInt(request.params.id));
     const { data: updatedData, error: updatedError } = await supabase
       .from("blog")
       .update({
@@ -79,7 +75,8 @@ app.put("/articles/:id", async (request, response) => {
         tags: request.body.tags ? request.body.tags : data[0].tags,
       })
       .eq("id", request.params.id);
-    response.send(request.body);
+    const { data, err } = await supabase.from("blog").select();
+    return response.send(data);
   } catch (error) {
     response.send({ error });
   }
@@ -92,10 +89,11 @@ app.delete("/articles/:id", async (request, response) => {
       .from("blog")
       .delete()
       .eq("id", request.params.id);
+    const { datar, errorr } = await supabase.from("blog").select();
     if (error) {
       return response.status(400).json(error);
     }
-    response.status(200).json({ data });
+    return response.send(datar);
   } catch (error) {
     response.send({ error });
   }
@@ -107,3 +105,5 @@ app.listen(process.env.PORT, () =>
       `: Server is running on port ${process.env.PORT}...`
   )
 );
+
+/// Domain: https://ausbildung-blog-api-production.up.railway.app/articles/
